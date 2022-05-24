@@ -4,6 +4,7 @@ Graph module for graph and digraph classes
 
 import subprocess
 
+from .node import Node
 
 class Graph:
     """
@@ -13,6 +14,15 @@ class Graph:
     def __init__(self, name: str = "Graph"):
         self.name = name
         self.nodes = []
+
+    def add_node(self, node: Node, parent: Node = None):
+        """
+        Adds a node to the graph or child node if parent is provided. 
+        """
+        if parent is None:
+            self.nodes.append(node)
+            return
+        parent.children.append(node)
     
     def generate(self, fp: str = None): # TODO: make generate function
         """
@@ -33,7 +43,7 @@ class Graph:
     def render(self, file_name: str, save_dot: bool = True):
         """
         Generates dot code for the graph and renders it with dot.
-        Throws error if dot is not installed.
+        Throws an error if dot is not installed.
         File name should be without extension.
         If save_dot is false, .dot output file will be deleted.
         """
