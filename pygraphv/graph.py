@@ -4,7 +4,7 @@ Graph module for graph and digraph classes
 
 import subprocess
 
-from .node import Node
+from .node import *
 
 class Graph:
     """
@@ -26,14 +26,14 @@ class Graph:
         self.name = name
         self.nodes = []
 
-    def add_node(self, node: Node, parent: Node = None):
+    def add_node(self, node: Node, label: str = "", parent: Node = None):
         """
         Adds a node to the graph or child node if parent is provided. 
         """
         if parent is None:
             self.nodes.append(node)
             return
-        parent.children.append(node)
+        parent.children.append(Connection(node, label))
 
     def generate(self, fp: str = None) -> str | None:
         """

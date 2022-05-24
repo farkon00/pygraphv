@@ -18,11 +18,21 @@ class Node:
             buf += f"Node{id(self)} [label=\"{repr(self.label)[1:-1]}\"];\n"
 
         for i in self.children:
-            if id(i) not in generated:
-                buf += i.generate(generated=generated, sep=sep)
-            buf += f"Node{id(self)} {sep} Node{id(i)};\n"
+            if isinstance(i, Connection):
+                if id(i.node) not in generated:
+                    buf += i.node.generate(generated=generated, sep=sep)
+                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label=\"{repr(i.label)[1:-1]}\"];\n"
+            else:
+                if id(i) not in generated:
+                    buf += i.generate(generated=generated, sep=sep)
+                buf += f"Node{id(self)} {sep} Node{id(i)};\n"
 
         return buf
 
     def __str__(self) -> str:
         return self.generate()
+
+class Connection:
+    def __init__(self, node: Node, label: str = ""):
+        self.node = node
+        self.label = label
