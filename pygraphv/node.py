@@ -1,13 +1,19 @@
-from typing import Optional
 from dataclasses import dataclass
 
 class Node:
     """
     Node in any graph class in pygraphv library.
     """
-    def __init__(self, label: str = "", children: list["Node"] = None):
+    def __init__(self, label: str = "", children: list["Node"] = None, styles: list | None = None):
         self.label = label
         self.children = children if children is not None else []
+        self.styles = styles if styles is not None else []
+
+    def _generate_attrs(self) -> str:
+        buf = ""
+        for i in self.styles:
+            buf += i.generate()
+        return buf
 
     def generate(self, generated: list[int] = None, sep: str = "--") -> str:
         """
@@ -19,6 +25,8 @@ class Node:
 
         if self.label:
             buf += f"Node{id(self)} [label=\"{repr(self.label)[1:-1]}\"];\n"
+        if self.styles:
+            buf += f"Node{id(self)} [{self._generate_attrs()}];\n"
 
         for i in self.children:
             if isinstance(i, Edge):
@@ -38,4 +46,4 @@ class Node:
 @dataclass
 class Edge:
     node: Node
-    label: Optional[str] = ""
+    label: str = ""
