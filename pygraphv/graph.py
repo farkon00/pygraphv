@@ -2,6 +2,7 @@
 Graph module for graph and digraph classes
 """
 
+from operator import ge
 import subprocess
 
 from .node import Node
@@ -30,8 +31,13 @@ class Graph:
         Writes code to file if fp(file path) is provided.
         """
         buf = ""
+        generated = []
 
         buf += f"graph {self.name}" + " {\n"
+
+        for i in self.nodes:
+            buf += i.generate(generated=generated)
+
         buf += "}\n"
 
         if fp is None:
