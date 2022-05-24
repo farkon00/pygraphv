@@ -5,6 +5,7 @@ Graph module for graph and digraph classes
 import subprocess
 
 from .node import *
+from .style import *
 
 class Graph:
     """
@@ -13,18 +14,13 @@ class Graph:
     Can generate dot code for the graph.
     """
 
-    GRAPH_TYPE = "graph"
+    GRAPH_TYPE = "graph "
     SEPARATOR = "--"
 
-    def __init__(self, name: str = "Graph"):
-        """
-        Base class for graphs in the pygraphv library.
-
-        Can generate dot code for the graph.
-        """
-
+    def __init__(self, name: str = "Graph", styles: list[Style] = None):
         self.name = name
         self.nodes = []
+        self.styles = styles if styles is not None else []
 
     def add_node(self, node: Node, label: str = "", parent: Node = None):
         """
@@ -44,10 +40,12 @@ class Graph:
         buf = ""
         generated = []
 
-        buf += f"{self.GRAPH_TYPE} {self.name}" + " {\n"
+        buf += f"{self.GRAPH_TYPE}{self.name}" + " {\n"
 
         for i in self.nodes:
             buf += i.generate(generated=generated, sep=self.SEPARATOR)
+        if self.styles:
+            buf += f"{Style.generate_attrs(self.styles)}\n"
 
         buf += "}\n"
 
@@ -81,5 +79,15 @@ class Digraph(Graph):
     Can generate dot code for the graph.
     """
 
-    GRAPH_TYPE = "digraph" 
+    GRAPH_TYPE = "digraph " 
     SEPARATOR = "->"
+
+class Cluster(Graph):
+    """
+    Class for clusters in the pygraphv library.
+
+    Can generate dot code for the cluster.
+    """
+
+    GRAPH_TYPE = "subgraph cluster_"
+    SEPARATOR = "--"
