@@ -6,7 +6,7 @@ class Node:
         self.label = label
         self.children = children if children is not None else []
 
-    def generate(self, generated: list[int] = None):
+    def generate(self, generated: list[int] = None, sep: str = "--") -> str:
         """
         Generates dot code of node.
         """
@@ -19,8 +19,8 @@ class Node:
 
         for i in self.children:
             if id(i) not in generated:
-                buf += i.generate(generated=generated)
-            buf += f"Node{id(self)} -- Node{id(i)};\n"
+                buf += i.generate(generated=generated, sep=sep)
+            buf += f"Node{id(self)} {sep} Node{id(i)};\n"
 
         return buf
 
