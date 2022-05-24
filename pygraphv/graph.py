@@ -33,7 +33,7 @@ class Graph:
         if parent is None:
             self.nodes.append(node)
             return
-        parent.children.append(Connection(node, label))
+        parent.children.append(Edge(node, label))
 
     def generate(self, fp: str = None) -> str | None:
         """
