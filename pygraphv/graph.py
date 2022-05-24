@@ -10,6 +10,7 @@ from .node import Node
 class Graph:
     """
     Base class for graphs in the pygraphv library.
+    
     Can generate dot code for the graph.
     """
     def __init__(self, name: str = "Graph"):
@@ -28,6 +29,7 @@ class Graph:
     def generate(self, fp: str = None): # TODO: make generate function
         """
         Generate dot code for the graph.
+
         Writes code to file if fp(file path) is provided.
         """
         buf = ""
@@ -49,8 +51,11 @@ class Graph:
     def render(self, file_name: str, save_dot: bool = True):
         """
         Generates dot code for the graph and renders it with dot.
+
         Throws an error if dot is not installed.
+
         File name should be without extension.
+
         If save_dot is false, .dot output file will be deleted.
         """
         self.generate(fp=f"{file_name}.dot")
