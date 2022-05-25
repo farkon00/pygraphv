@@ -4,7 +4,7 @@ from dataclasses import dataclass
 class Style:
     ATTRIBUTES = [
         "class_", "colorscheme", "fontcolor", "fontname", "fontsize", "href", "id",
-        "label", "nojustify", "style", "target", "tooltip", "URL"
+        "nojustify", "style", "target", "tooltip", "URL"
     ]
 
     class_: str | None = None
@@ -14,7 +14,6 @@ class Style:
     fontsize: float | None = None
     href: str | None = None
     id: str | None = None
-    label: str | None = None
     nojustify: bool | None = None
     style: str | None = None
     target: str | None = None
