@@ -207,3 +207,73 @@ class NodeStyle(Style):
     xlabel: str | None = None
     xlp: str | None = None
     z: float | None = None
+
+@dataclass
+class EdgeStyle(Style):
+    """
+    Style class of Edge in pygraphv library.
+    """
+    ATTRIBUTES = [
+        "arrowhead", "arrowsize", "arrowtail", "color", "comment", "constraint", "decorate", "dir",
+        "edgehref", "edgetarget", "edgetooltip", "edgeURL", "fillcolor", "head_lp", "headclip", 
+        "headhref", "headlabel", "headport", "headtarget", "headtooltip", "headURL", "labelangle", 
+        "labeldistance", "labelfloat", "labelfontcolor", "labelfontname", "labelfontsize", 
+        "labelhref", "labeltarget", "labeltooltip", "labelURL", "layer", "len", "lhead", "lp", 
+        "ltail", "minlen", "penwidth", "pos", "samehead", "sametail", "showboxes", "tail_lp", 
+        "tailclip", "tailhref", "taillabel", "tailport", "tailtarget", "tailtooltip", "tailURL",
+        "weight", "xlabel", "xlp", *Style.ATTRIBUTES
+    ]
+
+    arrowhead: str | None = None
+    arrowsize: float | None = None
+    arrowtail: str | None = None
+    color: str | None = None
+    comment: str | None = None
+    constraint: bool | None = None
+    decorate: bool | None = None
+    dir: str | None = None
+    edgehref: str | None = None
+    edgetarget: str | None = None
+    edgetooltip: str | None = None
+    edgeURL: str | None = None
+    fillcolor: str | None = None
+    head_lp: str | None = None
+    headclip: bool | None = None
+    headhref: str | None = None
+    headlabel: str | None = None
+    headport: str | None = None
+    headtarget: str | None = None
+    headtooltip: str | None = None
+    headURL: str | None = None
+    labelangle: float | None = None
+    labeldistance: float | None = None
+    labelfloat: bool | None = None
+    labelfontcolor: str | None = None
+    labelfontname: str | None = None
+    labelfontsize: float | None = None
+    labelhref: str | None = None
+    labeltarget: str | None = None
+    labeltooltip: str | None = None
+    labelURL: str | None = None
+    layer: str | None = None
+    len: float | None = None
+    lhead: str | None = None
+    lp: str | None = None
+    ltail: str | None = None
+    minlen: int | None = None
+    penwidth: float | None = None
+    pos: str | None = None
+    samehead: str | None = None
+    sametail: str | None = None
+    showboxes: int | None = None
+    tail_lp: str | None = None
+    tailclip: bool | None = None
+    tailhref: str | None = None
+    taillabel: str | None = None
+    tailport: str | None = None
+    tailtarget: str | None = None
+    tailtooltip: str | None = None
+    tailURL: str | None = None
+    weight: int | None = None
+    xlabel: str | None = None
+    xlp: str | None = None

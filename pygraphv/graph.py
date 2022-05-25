@@ -24,14 +24,15 @@ class Graph:
         self.subgraphs = []
         self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
 
-    def add_node(self, node: Node, label: str = "", parent: Node = None):
+    def add_node(self, node: Node, label: str = "", 
+     parent: Node = None, styles: list[EdgeStyle] = None):
         """
         Adds a node to the graph or child node if parent is provided. 
         """
         if parent is None:
             self.nodes.append(node)
             return
-        parent.children.append(Edge(node, label))
+        parent.children.append(Edge(node, label, styles=styles))
 
     def add_subgraph(self, subgraph, parent=None):
         """

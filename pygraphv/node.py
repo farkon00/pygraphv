@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from typing import Iterable
 
 from pygraphv.style import *
@@ -29,7 +28,10 @@ class Node:
             if isinstance(i, Edge):
                 if id(i.node) not in generated:
                     buf += i.node.generate(generated=generated, sep=sep)
-                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label=\"{repr(i.label)[1:-1]}\"];\n"
+                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label=\"{repr(i.label)[1:-1]}\";"
+                if i.styles:
+                    buf += Style.generate_attrs(i.styles)
+                buf += "];\n"
             else:
                 if id(i) not in generated:
                     buf += i.generate(generated=generated, sep=sep)
@@ -40,7 +42,12 @@ class Node:
     def __str__(self) -> str:
         return self.generate()
 
-@dataclass
 class Edge:
-    node: Node
-    label: str = ""
+    """
+    Edge between two nodes in any graph class in pygraphv library.
+    """
+
+    def __init__(self, node: Node, label: str = "", styles: list[EdgeStyle] = None):
+        self.node = node
+        self.label = label
+        self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
