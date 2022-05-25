@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Iterable
 
 from pygraphv.style import *
 
@@ -9,7 +10,7 @@ class Node:
     def __init__(self, label: str = "", children: list["Node"] = None, styles: list[NodeStyle] | None = None):
         self.label = label
         self.children = children if children is not None else []
-        self.styles = styles if styles is not None else []
+        self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
 
     def generate(self, generated: list[int] = None, sep: str = "--") -> str:
         """

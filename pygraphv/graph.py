@@ -3,6 +3,7 @@ Graph module for graph and digraph classes
 """
 
 import subprocess
+from typing import Iterable
 
 from .node import *
 from .style import *
@@ -21,7 +22,7 @@ class Graph:
         self.name = name
         self.nodes = []
         self.subgraphs = []
-        self.styles = styles if styles is not None else []
+        self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
 
     def add_node(self, node: Node, label: str = "", parent: Node = None):
         """
