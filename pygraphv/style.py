@@ -18,7 +18,7 @@ class Style:
         buf = ""
         for i in self.ATTRIBUTES:
             if self.__getattribute__(i) is not None:
-                buf += f"{i}={self.__getattribute__(i)};\n"
+                buf += f"{i}={self.__getattribute__(i)};"
         return buf
 
 @dataclass

@@ -20,6 +20,7 @@ class Graph:
     def __init__(self, name: str = "Graph", styles: list[Style] = None):
         self.name = name
         self.nodes = []
+        self.subgraphs = []
         self.styles = styles if styles is not None else []
 
     def add_node(self, node: Node, label: str = "", parent: Node = None):
@@ -30,6 +31,16 @@ class Graph:
             self.nodes.append(node)
             return
         parent.children.append(Edge(node, label))
+
+    def add_subgraph(self, subgraph, parent=None):
+        """
+        Adds subgraph to the graph.
+        """
+        if parent is None:
+            self.subgraphs.append(subgraph)
+            return
+        parent.subgraphs.append(subgraph)
+
 
     def generate(self, fp: str = None) -> str | None:
         """
@@ -44,6 +55,8 @@ class Graph:
 
         for i in self.nodes:
             buf += i.generate(generated=generated, sep=self.SEPARATOR)
+        for i in self.subgraphs:
+            buf += i.generate(self.SEPARATOR)
         if self.styles:
             buf += f"{Style.generate_attrs(self.styles)}\n"
 
@@ -91,3 +104,7 @@ class Cluster(Graph):
 
     GRAPH_TYPE = "subgraph cluster_"
     SEPARATOR = "--"
+
+    def generate(self, sep, fp: str = None) -> str | None:
+        self.SEPARATOR = sep
+        return super().generate(fp)
