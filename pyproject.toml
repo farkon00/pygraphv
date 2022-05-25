@@ -1,14 +1,17 @@
-[tool.poetry]
-name = "pygraphv"
-homepage = "https://github.com/farkon00/pygraphv"
-version = "0.1.0"
-description = "Library, that can generate graphviz dot files from python objects"
-authors = ["farkon00 <sammer2016sammer@gmail.com>"]
-license = "MIT"
-readme = "README.md"
+[metadata]
+name = pygraphv
+homepage = https://github.com/farkon00/pygraphv
+version = 0.1.0
+description = Library, that can generate graphviz dot files from python objects
+author = farkon00
+author_email = sammer2016sammer@gmail.com
+license = MIT
+readme = README.md
 classifiers = [
 	"Environment :: Console",
 	"Operating System :: Microsoft :: Windows",
 	"Operating System :: MacOS",
 	"Operating System :: POSIX :: Linux",
 ]
+[options]
+python_requires = >=3.6
