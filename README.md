@@ -7,11 +7,12 @@ Basic graph:
 ```py
 from pygraphv.graph import Graph
 from pygraphv.node import Node
+from pygraphv.style import GraphStyle
 
 # Chose one of this
 # You can look at difference in Graphviz docs
 # digraph = Digraph("Digraph")
-graph = Graph("Graph", styles=GraphStyle(bgcolor="#0d1117")) # Style is for your eyes to not hurt because of white bg
+graph = Graph("Graph")
 
 # Adds node with name A, that has child node B
 a = Node("A")
@@ -23,6 +24,8 @@ graph.add_node(Node("B"), parent=a)
 graph.render("Your first graph")
 ```
 
+<img src="https://github.com/farkon00/pygraphv/blob/master/examples/basic.svg">
+
 Styles:
 ```py
 from pygraphv.graph import Digraph
@@ -31,7 +34,7 @@ from pygraphv.node import Node
 
 # Now digraph example
 # Only difference to regular graph is arrows at ends of connections
-graph = Digraph("Graph", styles=[GraphStyle(bgcolor="#0d1117"), GraphStyle(href="github.com/farkon00")])
+graph = Digraph("Graph", styles=[GraphStyle(bgcolor="lightblue"), GraphStyle(href="github.com/farkon00")])
 
 # Adds node with name A, that has child node B
 a = Node("A", styles=NodeStyle(color="red", shape="box"))
@@ -43,13 +46,15 @@ graph.add_node(Node("B"), label="Styled edge", parent=a, styles=EdgeStyle(arrowh
 graph.render("Styles")
 ```
 
+<img src="https://github.com/farkon00/pygraphv/blob/master/examples/styles.svg">
+
 Clusters:
 ```py
 from pygraphv.graph import Graph, Cluster
 from pygraphv.style import *
 from pygraphv.node import Node
 
-graph = Graph("Graph", bgcolor="#0d1117")
+graph = Graph("Graph")
 
 # Adds node with name A, that has child node B
 a = Node("A")
@@ -75,3 +80,5 @@ graph.add_subgraph(cluster)
 # And renders it to svg file, needs dot compiler installed and added to path
 graph.render("Clusters")
 ```
+
+<img src="https://github.com/farkon00/pygraphv/blob/master/examples/clusters.svg">
