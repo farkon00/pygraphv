@@ -29,7 +29,7 @@ class Node:
             if isinstance(i, Edge):
                 if id(i.node) not in generated:
                     buf += i.node.generate(generated=generated, sep=sep)
-                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label={get_dot_repr(self.label)};"
+                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label={get_dot_repr(i.label)};"
                 if i.styles:
                     buf += Style.generate_attrs(i.styles)
                 buf += "];\n"
