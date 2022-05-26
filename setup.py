@@ -8,7 +8,7 @@ with open("D:\pygraphv\PYPIREADME.md", "r") as fh:
 if __name__ == '__main__':
     setuptools.setup(
         name="pygraphv", 
-        version="0.1", 
+        version="0.2", 
         author="farkon00",
         author_email="sammer2016sammer@gmail.com",
         description="Python library for generating dot programming language for creating graphviz graphs from python OO style code.",
