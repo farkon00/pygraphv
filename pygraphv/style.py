@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from pygraphv.utils import get_dot_repr
+
 @dataclass
 class Style:
     ATTRIBUTES = [
@@ -33,7 +35,7 @@ class Style:
         for i in self.ATTRIBUTES:
             if self.__getattribute__(i) is not None:
                 value = self.__getattribute__(i)
-                buf += f"{i}={value if not isinstance(value, str) else f'{quote}{repr(value)[1:-1]}{quote}'};"
+                buf += f"{i}={get_dot_repr(value)};"
         return buf
 
 @dataclass

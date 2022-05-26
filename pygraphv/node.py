@@ -1,6 +1,7 @@
 from typing import Iterable
 
 from pygraphv.style import *
+from pygraphv.utils import get_dot_repr
 
 class Node:
     """
@@ -20,7 +21,7 @@ class Node:
         generated.append(id(self))
 
         if self.label:
-            buf += f"Node{id(self)} [label=\"{repr(self.label)[1:-1]}\"];\n"
+            buf += f"Node{id(self)} [label={get_dot_repr(self.label)}];\n"
         if self.styles:
             buf += f"Node{id(self)} [{Style.generate_attrs(self.styles)}];\n"
 
@@ -28,7 +29,7 @@ class Node:
             if isinstance(i, Edge):
                 if id(i.node) not in generated:
                     buf += i.node.generate(generated=generated, sep=sep)
-                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label=\"{repr(i.label)[1:-1]}\";"
+                buf += f"Node{id(self)} {sep} Node{id(i.node)} [label={get_dot_repr(self.label)};"
                 if i.styles:
                     buf += Style.generate_attrs(i.styles)
                 buf += "];\n"
