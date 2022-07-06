@@ -3,7 +3,7 @@ Graph module for graph and digraph classes
 """
 
 import subprocess
-from typing import Iterable
+from typing import Iterable, List, Optional
 
 from .node import *
 from .style import *
@@ -18,14 +18,14 @@ class Graph:
     GRAPH_TYPE = "graph "
     SEPARATOR = "--"
 
-    def __init__(self, name: str = "Graph", styles: list[Style] = None):
+    def __init__(self, name: str = "Graph", styles: Optional[List[Style]] = None):
         self.name = name
         self.nodes = []
         self.subgraphs = []
         self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
 
     def add_node(self, node: Node, label: str = "", 
-     parent: Node = None, styles: list[EdgeStyle] = None):
+     parent: Optional[Node] = None, styles: Optional[List[EdgeStyle]] = None):
         """
         Adds a node to the graph or child node if parent is provided. 
         """
@@ -44,7 +44,7 @@ class Graph:
         parent.subgraphs.append(subgraph)
 
 
-    def generate(self, fp: str = None) -> str | None:
+    def generate(self, fp: str = None) -> Optional[str]:
         """
         Generates dot code for the graph.
 
@@ -107,6 +107,6 @@ class Cluster(Graph):
     GRAPH_TYPE = "subgraph cluster_"
     SEPARATOR = "--"
 
-    def generate(self, sep, fp: str = None) -> str | None:
+    def generate(self, sep, fp: Optional[str] = None) -> Optional[str]:
         self.SEPARATOR = sep
         return super().generate(fp)

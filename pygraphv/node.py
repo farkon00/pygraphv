@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, List, Optional
 
 from pygraphv.style import *
 from pygraphv.utils import get_dot_repr
@@ -7,12 +7,12 @@ class Node:
     """
     Node in any graph class in pygraphv library.
     """
-    def __init__(self, label: str = "", children: list["Node"] = None, styles: list[NodeStyle] | None = None):
+    def __init__(self, label: str = "", children: Optional[List["Node"]] = None, styles: Optional[List[NodeStyle]] = None):
         self.label = label
         self.children = children if children is not None else []
         self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
 
-    def generate(self, generated: list[int] = None, sep: str = "--") -> str:
+    def generate(self, generated: Optional[List[int]] = None, sep: str = "--") -> str:
         """
         Generates dot code of node.
         """
@@ -48,7 +48,7 @@ class Edge:
     Edge between two nodes in any graph class in pygraphv library.
     """
 
-    def __init__(self, node: Node, label: str = "", styles: list[EdgeStyle] = None):
+    def __init__(self, node: Node, label: str = "", styles: Optional[List[EdgeStyle]] = None):
         self.node = node
         self.label = label
         self.styles = (styles if isinstance(styles, Iterable) else [styles]) if styles is not None else []
