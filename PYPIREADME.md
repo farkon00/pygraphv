@@ -78,3 +78,40 @@ graph.add_subgraph(cluster)
 # And renders it to svg file, needs dot compiler installed and added to path
 graph.render("Clusters")
 ```
+
+## Subclassing
+You may want to use subclassing to plot your tree.
+
+```
+from pygraphv.graph import Graph
+from pygraphv.node import Node
+
+class BTreeNode(Node):
+    def __init__(self, left, right, value: int):
+        super().__init__(str(value))
+        self.left = left
+        self.right = right
+        if left is not None:
+            self.children.append(left)
+        if right is not None:
+            self.children.append(right)
+
+tree = Graph(name="BinaryTree")
+tree.add_node(
+    BTreeNode(
+        BTreeNode(
+            None, 
+            BTreeNode(None, None, 69),
+            42
+        ),
+        BTreeNode(
+            BTreeNode(None, None, 34),
+            BTreeNode(None, None, 35),
+            420
+        ),
+        6969
+    )
+)
+
+tree.render("Binary Tree")
+```
