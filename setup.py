@@ -2,13 +2,13 @@
 
 import setuptools
 
-with open("D:\pygraphv\PYPIREADME.md", "r") as fh:
+with open("/mnt/c/data/pygraphv/PYPIREADME.md", "r") as fh:
     long_description = fh.read()
 
 if __name__ == '__main__':
     setuptools.setup(
         name="pygraphv", 
-        version="0.2", 
+        version="0.2.1", 
         author="farkon00",
         author_email="sammer2016sammer@gmail.com",
         description="Python library for generating dot programming language for creating graphviz graphs from python OO style code.",
