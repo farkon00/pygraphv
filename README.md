@@ -86,7 +86,7 @@ graph.render("Clusters")
 ## Subclassing
 You may want to use subclassing to plot your tree.
 
-```
+```py
 from pygraphv.graph import Graph
 from pygraphv.node import Node
 
